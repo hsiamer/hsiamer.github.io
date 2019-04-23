@@ -64,6 +64,10 @@ def get_ebook():
     links = get_linklist(id)
     cps = len(links)
     bookname = get_title(id)
+    href = "<a href='novels/" + bookname + ".txt' target='_blank'>" + bookname + "</a><br>"
+    with open(novellist.html,'a+',encoding = 'utf-8') as f:
+        f.write('\n' + href + '\n')
+        f.close()
     print(bookname,'章节总数:',cps)
     basedir = 'novels/' + bookname + '.txt'
     with open(basedir,'w+',encoding = 'utf-8') as f:
@@ -78,6 +82,7 @@ def get_ebook():
 
 
 get_ebook()
+os.system(' echo "" >>  ')
 os.system('git add -A')
 os.system("git commit -m '下载完成,自动提交'")
 os.system('git push')
