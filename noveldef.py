@@ -65,7 +65,7 @@ def get_ebook():
     cps = len(links)
     bookname = get_title(id)
     href = "<a href='novels/" + bookname + ".txt' target='_blank'>" + bookname + "</a><br>"
-    with open(novellist.html,'a+',encoding = 'utf-8') as f:
+    with open('novellist.html','a+',encoding = 'utf-8') as f:
         f.write('\n' + href + '\n')
         f.close()
     print(bookname,'章节总数:',cps)
