@@ -60,15 +60,11 @@ def get_text(link):
 
 def get_ebook():
     id=input('输入书籍编号\n')
-    startchapter=int(input('输入起始章节\n'))
     links = get_linklist(id)
     cps = len(links)
     bookname = get_title(id)
-    href = "<a href='novels/" + bookname + ".txt' target='_blank'>" + bookname + "</a><br>"
-    with open('novellist.html','a+',encoding = 'utf-8') as f:
-        f.write('\n' + href + '\n')
-        f.close()
     print(bookname,'章节总数:',cps)
+    startchapter=int(input('输入起始章节\n'))
     basedir = 'novels/' + bookname + '.txt'
     with open(basedir,'w+',encoding = 'utf-8') as f:
         f.write('\n' + bookname + '\n')
@@ -79,10 +75,17 @@ def get_ebook():
             f.write(get_text(links[i]))
             f.close()
         print('\t\t\t\t\t','(',i+1,'of',cps,')')
+    href = "<a href='novels/" + bookname + ".txt' target='_blank'>" + bookname + "</a><br>"
+    print()
+    print('将下载内容添加到网页链接')
+    print()
+    with open('novellist.html','a+',encoding = 'utf-8') as f:
+        f.write('\n' + href + '\n')
+        f.close()
 
 
 get_ebook()
-os.system(' echo "" >>  ')
+print('提交到git远程仓库')
 os.system('git add -A')
 os.system("git commit -m '下载完成,自动提交'")
 os.system('git push')
