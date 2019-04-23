@@ -78,7 +78,7 @@ def get_ebook():
         with open(basedir,'a+',encoding = 'utf-8') as f:
             f.write(get_text(links[i]))
             f.close()
-        print('\t\t\t\t\t','(',i,'of',cps,')')
+        print('\t\t\t\t\t','(',i+1,'of',cps,')')
 
 
 get_ebook()
