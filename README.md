@@ -1,15 +1,10 @@
-This page is a personal website.
-I make it to familiar my html skills and English.
-Some musics that get from Internet are also stored here
-
-God bless you
 
 noveldef.py的用法
 
 打开网站 https://www.-------.com
 
 
-  定制工具,不通用,真实网址自行寻找
+#  定制工具,不通用,真实网址自行寻找
 
 
 找到自己想要下载的小说并打开页面
@@ -20,9 +15,7 @@ https//www.-------.com/book/$bookid/xxxxxx
 
 记住其中的 $bookid 内容
 
-python3执行 noveldef.py
-
-python3 noveldef.py
+执行 run.sh
 
 按照提示输入上一步获取的 bookid
 
