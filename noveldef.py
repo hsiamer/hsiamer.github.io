@@ -60,6 +60,9 @@ def get_text(link):
 
 def get_ebook():
     id=input('输入书籍编号\n')
+    if id == '':
+        print('输入错误,程序退出')
+        return
     links = get_linklist(id)
     cps = len(links)
     bookname = get_title(id)
