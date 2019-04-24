@@ -75,6 +75,16 @@ def get_text(link):
     fulltext = fulltext + '\n'
     return fulltext
 
+def mkdir_bookdir(bookname):
+    dir = 'novels/' + id
+    bookname = dir + bookname
+    if os.path.exists(bookname):
+        shutil.rmtree(bookname)
+        os.mkdir(bookname)
+    else:
+        os.mkdir(bookname)
+    return bookname
+
 def get_ebook(id):
     links = get_linklist(id)
     cps = len(links)
@@ -99,13 +109,40 @@ def get_ebook(id):
         f.write('\n' + href + '\n')
         f.close()
 
+def get_ebook_cpt(id):
+    links = get_linklist(id)
+    cps = len(links)
+    p = '0'
+    bookname = get_title(id)
+    print(bookname,'章节总数:',cps)
+    startchapter=int(input('输入起始章节,起始章节为1\n'))
+    based = mkdir_bookdir(bookname)
+    for i in range(startchapter-1,cps):
+        chaptername = get_chaptername(links[i])
+        chaptername = p*(5-len(str(i))) + str(i+1) + chaptername
+        basedir = based + '/' + chaptername + '.txt'
+        with open(basedir,'w+',encoding = 'utf-8') as f:
+            f.write(get_text(links[i]))
+            f.close()
+        print('\t\t\t\t\t','(',i+1,'of',cps,')')
+        time.sleep(1)
+
 id=input('下载请输入书籍编号,提交代码码请直接按Enter键,按Q键退出\n')
 if id=='q' or id=='Q': 
     print('程序退出')
     sys.exit()
 
 if id!='':
-    get_ebook(id)
+    c = input('Y:每章一个文件;N:全本一个文件;Q:取消下载')
+    if c == 'Q' or c == 'q':
+        sys.exit()
+    if c == 'N' or c == 'n':
+        get_ebook(id)
+    if c == 'Y' or c == 'y':
+        get_ebook_cpt(id)
+    if c != 'Y' and c != 'y' and c != 'N' and c != 'n' and c != 'Q' and c != 'q':
+        print('输入错误,退出程序')
+        sys.exit()
     bookname = get_title(id)
     print('提交到git远程仓库')
     os.system('git add -A')
