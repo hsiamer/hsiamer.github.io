@@ -69,12 +69,12 @@ def get_ebook(id):
     with open(basedir,'w+',encoding = 'utf-8') as f:
         f.write('\n' + bookname + '\n')
         f.close()
-    time.sleep(1)
     for i in range(startchapter-1,cps):
         with open(basedir,'a+',encoding = 'utf-8') as f:
             f.write(get_text(links[i]))
             f.close()
         print('\t\t\t\t\t','(',i+1,'of',cps,')')
+        time.sleep(1)
     href = "<a href='novels/" + bookname + ".txt' target='_blank'>" + bookname + "</a><br>"
     print()
     print('将下载内容添加到网页链接')
