@@ -105,4 +105,3 @@ if id=='':
     os.system(comm)
     os.system('git push')
 
-
