@@ -96,7 +96,7 @@ if id!='':
     os.system('git push')
 
 if id=='':
-    print('无下载内容,只提交代码到远程仓库')
+    print('提交代码到远程仓库')
     os.system('git add -A')
     os.system("git commit -m '自动提交代码到远程仓库'")
     os.system('git push')
