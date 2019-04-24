@@ -10,6 +10,7 @@ from lxml import etree
 import time
 import os
 import sys
+import shutil
 
 baseurl = 'https://www.biqubao.com'
 
@@ -27,7 +28,7 @@ def get_title(id):
     title = s.xpath('//*[@id="info"]/h1/text()')
     return title[0]
 
-#章节链接 （ list ）
+#章节链接
 def get_linklist(id):
     bookid = str(id)
     url = baseurl + '/book/' + bookid
@@ -38,7 +39,22 @@ def get_linklist(id):
     links = s.xpath('//*[@id="list"]/dl/dd/a/@href')
     return links
 
-#章节名称 + 正文
+#章节名称
+def get_chaptername(link):
+    url = baseurl + link
+    r = requests.get(url,headers)
+    r.encoding="gbk"
+    html = r.text
+    s = etree.HTML(html)
+    chaptername1 = s.xpath('//div[@class="bookname"]/h1/text()')
+    if len(chaptername1) > 0:
+        chaptername = chaptername1[0]
+    else:
+        chaptername = ''
+    print(chaptername)
+    return chaptername
+
+#章节正文
 def get_text(link):
     url = baseurl + link
     r = requests.get(url,headers)
@@ -90,9 +106,12 @@ if id=='q' or id=='Q':
 
 if id!='':
     get_ebook(id)
+    bookname = get_title(id)
     print('提交到git远程仓库')
     os.system('git add -A')
-    os.system("git commit -m '下载完成,自动提交'")
+    comm = bookname + ' 下载完成,自动提交'
+    comm = "git commit -m '" + comm  + "'"
+    os.system(comm)
     os.system('git push')
 
 if id=='':
