@@ -51,7 +51,7 @@ def get_chaptername(link):
         chaptername = chaptername1[0]
     else:
         chaptername = ''
-    print(chaptername)
+#    print(chaptername)
     return chaptername
 
 #章节正文
@@ -133,7 +133,7 @@ if id=='q' or id=='Q':
     sys.exit()
 
 if id!='':
-    c = input('Y:每章一个文件;N:全本一个文件;Q:取消下载')
+    c = input('Y:每章一个文件;N:全本一个文件;Q:取消下载\n')
     if c == 'Q' or c == 'q':
         sys.exit()
     if c == 'N' or c == 'n':
