@@ -83,7 +83,7 @@ def get_ebook(id):
         f.write('\n' + href + '\n')
         f.close()
 
-id=input('请输入书籍编号,如果只需要提交编码,章节按Enter键,退出请按q键\n')
+id=input('下载请输入书籍编号,提交代码码请直接按Enter键,按Q键退出\n')
 if id=='q' or id=='Q': 
     print('程序退出')
     sys.exit()
