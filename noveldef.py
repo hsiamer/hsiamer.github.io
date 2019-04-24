@@ -98,7 +98,7 @@ if id!='':
 if id=='':
     print('提交代码到远程仓库')
     os.system('git add -A')
-    comm = input('提交注释内容:(暂不支持中文内容)\n')
+    comm = input('提交注释内容(输入完成后请切换到英文输入):\n')
     if comm == '':
         comm = '自动提交代码到远程仓库'
     comm = "git commit -m '" + comm + "'"
