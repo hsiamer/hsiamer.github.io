@@ -98,7 +98,9 @@ if id!='':
 if id=='':
     print('提交代码到远程仓库')
     os.system('git add -A')
-    os.system("git commit -m '自动提交代码到远程仓库'")
+    comm = input('提交注释内容:\n')
+    comm = "git commit -m '" + comm + "'"
+    os.system(comm)
     os.system('git push')
 
 
