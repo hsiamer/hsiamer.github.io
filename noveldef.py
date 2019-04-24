@@ -9,6 +9,7 @@ import requests
 from lxml import etree
 import time
 import os
+import sys
 
 baseurl = 'https://www.biqubao.com'
 
@@ -58,11 +59,7 @@ def get_text(link):
     fulltext = fulltext + '\n'
     return fulltext
 
-def get_ebook():
-    id=input('输入书籍编号\n')
-    if id == '':
-        print('输入错误,程序退出')
-        return
+def get_ebook(id):
     links = get_linklist(id)
     cps = len(links)
     bookname = get_title(id)
@@ -86,9 +83,22 @@ def get_ebook():
         f.write('\n' + href + '\n')
         f.close()
 
+id=input('请输入书籍编号,如果只需要提交编码,章节按Enter键,退出请按q键\n')
+if id=='q' or id=='Q': 
+    print('程序退出')
+    sys.exit()
 
-get_ebook()
-print('提交到git远程仓库')
-os.system('git add -A')
-os.system("git commit -m '下载完成,自动提交'")
-os.system('git push')
+if id!='':
+    get_ebook(id)
+    print('提交到git远程仓库')
+    os.system('git add -A')
+    os.system("git commit -m '下载完成,自动提交'")
+    os.system('git push')
+
+if id=='':
+    print('无下载内容,只提交代码到远程仓库')
+    os.system('git add -A')
+    os.system("git commit -m '自动提交代码到远程仓库'")
+    os.system('git push')
+
+
