@@ -76,7 +76,7 @@ def get_text(link):
     return fulltext
 
 def mkdir_bookdir(bookname):
-    dir = 'novels/' + id
+    dir = 'novels/' + '0'*(6-len(id)) + id
     bookname = dir + bookname
     if os.path.exists(bookname):
         shutil.rmtree(bookname)
@@ -91,7 +91,7 @@ def get_ebook(id):
     bookname = get_title(id)
     print(bookname,'章节总数:',cps)
     startchapter=int(input('输入起始章节\n'))
-    basedir = 'novels/' + bookname + '.txt'
+    basedir = 'novels/' + '0'*(6-len(id)) + bookname + '.txt'
     with open(basedir,'w+',encoding = 'utf-8') as f:
         f.write('\n' + bookname + '\n')
         f.close()
@@ -119,7 +119,7 @@ def get_ebook_cpt(id):
     based = mkdir_bookdir(bookname)
     for i in range(startchapter-1,cps):
         chaptername = get_chaptername(links[i])
-        chaptername = p*(5-len(str(i))) + str(i+1) + chaptername
+        chaptername = p*(6-len(str(i))) + str(i+1) + ' - '  + chaptername
         basedir = based + '/' + chaptername + '.txt'
         with open(basedir,'w+',encoding = 'utf-8') as f:
             f.write(get_text(links[i]))
